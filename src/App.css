@@ -1,16 +1,36 @@
 .App {
   text-align: center;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .black-nav {
   display: flex;
   background-color: black;
   width: 100%;
-  height: 20px;
+  height: 60px;
   color: white;
-  padding: 20px;
   font-size: 20px;
   font-weight: 600;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.article {
+  display: block;
+  border-style: solid;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal {
+  background-color: rgba(175, 175, 175, 0.3);
+  padding: 20px;
+  width: 50%;
 }
 
 .App-logo {
