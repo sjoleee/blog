@@ -15,46 +15,66 @@ function App() {
   }
   const [modal, setModal] = useState(false);
   const [good, setGood] = useState(arr);
+  const [clickTitle, setClickTitle] = useState(0);
+  const [inputText, setInputText] = useState("");
 
   return (
     <div className="App">
       <div className="black-nav">blog</div>
-      <button
-        onClick={() => {
-          setModal((prev) => !prev);
-        }}
-      >
-        modal btn
-      </button>
       {title.map((param, idx) => {
         return (
           <div className="article">
-            <h2>
-              {param}{" "}
-              <p
-                onClick={() => {
-                  let goodArr = [...good];
-                  goodArr[idx]++;
-                  setGood(goodArr);
-                }}
-              >
-                ⭐️{good[idx]}
-              </p>
+            <h2
+              onClick={() => {
+                setModal((prev) => !prev);
+                setClickTitle(idx);
+              }}
+            >
+              {param}
             </h2>
-            <p>{date[2]}</p>
+
+            <p
+              onClick={() => {
+                let goodArr = [...good];
+                goodArr[idx]++;
+                setGood(goodArr);
+              }}
+            >
+              ⭐️{good[idx]}
+            </p>
+            <p>{date[idx]}</p>
           </div>
         );
       })}
-      {modal && <Modal />}
+
+      <div className="publish">
+        <input
+          onChange={(e) => {
+            setInputText(e.target.value);
+          }}
+        ></input>
+        <button
+          onClick={() => {
+            let titleArr = [...title];
+            titleArr.push(inputText);
+            arr.push(0);
+            setTitle(titleArr);
+          }}
+        >
+          글쓰기
+        </button>
+      </div>
+
+      {modal && <Modal title={title} clickTitle={clickTitle} date={date} />}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>title</h4>
-      <p>aaa</p>
+      <h4>{props.title[props.clickTitle]}</h4>
+      <p>{props.date[props.clickTitle]}</p>
       <p>bbb</p>
     </div>
   );
